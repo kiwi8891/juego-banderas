@@ -54,7 +54,8 @@ select{flex:1;padding:13px 36px 13px 14px;border-radius:3px;border:1px solid var
 .ct{font-size:.56em;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
 .cb{padding:22px}
 .fe{font-size:5.5em;line-height:1;text-align:center;display:block}
-.ci{width:100%;max-height:210px;object-fit:cover;border-radius:2px;display:block}
+.ci-wrap{width:100%;aspect-ratio:1/1;background:#000;border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ci{width:100%;height:100%;object-fit:contain;display:block}
 .cpt{font-family:'Syne',sans-serif;font-size:2.2em;font-weight:800;text-align:center;color:var(--w)}
 .ei{color:var(--mu);font-size:.8em;text-align:center;padding:6px}
 .bh{background:transparent;border:1px solid var(--bd);color:var(--mu2);padding:15px;font-size:.82em;letter-spacing:.05em;margin:16px 0 28px;border-radius:3px}
@@ -176,7 +177,7 @@ async function clue(def){
     const term=k==='monument'?c.mt:c.ft;
     const name=k==='monument'?c.mn:c.fn;
     const u=await img(term);
-    const imgTag=u?`<img class="ci" src="${u}" onerror="this.outerHTML='<p class=ei>—</p>'">`:`<p class="ei">Cargando…</p>`;
+    const imgTag=u?`<div class="ci-wrap"><img class="ci" src="${u}" onerror="this.parentNode.outerHTML='<p class=ei>—</p>'"></div>`:`<p class="ei">Cargando…</p>`;
     b=imgTag+`<div style="text-align:center;margin-top:12px;font-size:.8em;color:var(--mu2);letter-spacing:.06em">${name}</div>`;
   }
   return`<div class="cc"><div class="ch"><span class="ct">${l}</span></div><div class="cb">${b}</div></div>`;
