@@ -23,61 +23,47 @@
 html,body{min-height:100vh;background:var(--bg);color:var(--w);font-family:'DM Sans',sans-serif;overflow-x:hidden;text-transform:uppercase}
 body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(200,169,110,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
 #app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 24px 64px}
-
-/* ── HOME ── */
 .hw{width:100%;max-width:520px}
 .eyebrow{font-size:.62em;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
 .ht{font-family:'Syne',sans-serif;font-size:3.6em;font-weight:800;line-height:.95;color:var(--w);margin-bottom:8px}
 .hs{font-size:.9em;color:var(--mu2);font-weight:300;margin-bottom:52px}
 .sl{font-size:.58em;font-weight:700;letter-spacing:.2em;color:var(--mu);text-transform:uppercase;margin-bottom:10px}
-
 .btn{width:100%;border:none;border-radius:3px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn:active{transform:scale(.97)}
 .bm{background:var(--w);color:var(--bg);padding:19px 24px;font-size:1em;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:.03em}
 .bm:hover{background:var(--gold)}
 .bx{background:transparent;border:1px solid var(--bd);color:var(--mu2);padding:14px 18px;font-size:.85em;white-space:nowrap;border-radius:3px}
 .bx:hover{border-color:var(--gold2);color:var(--gold)}
-
 .div{display:flex;align-items:center;gap:14px;color:var(--mu);font-size:.65em;letter-spacing:.14em;text-transform:uppercase;margin:22px 0 18px}
 .div::before,.div::after{content:'';flex:1;height:1px;background:var(--bd)}
 .sr{display:flex;gap:8px;margin-bottom:20px}
 select{flex:1;padding:13px 36px 13px 14px;border-radius:3px;border:1px solid var(--bd);background:var(--s1);color:var(--w);font-size:.9em;font-family:'DM Sans',sans-serif;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a4a4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-
-/* ── GAME ── */
 .gw{width:100%;max-width:520px}
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--bd)}
 .si{text-align:center}
 .sn{font-family:'Syne',sans-serif;font-size:1.8em;font-weight:800;line-height:1}
 .sk{font-size:.55em;color:var(--mu);text-transform:uppercase;letter-spacing:.14em;margin-top:3px}
 .sdv{width:1px;height:36px;background:var(--bd)}
-
 .dots{display:flex;gap:5px;justify-content:center;margin-bottom:32px}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--bd);transition:all .35s}
 .dot.on{background:var(--gold);box-shadow:0 0 10px rgba(200,169,110,.45);transform:scale(1.3)}
 .dot.was{background:var(--gold2)}
-
 .cc{background:var(--s1);border:1px solid var(--bd);border-radius:4px;overflow:hidden;margin-bottom:8px;animation:su .28s ease}
 @keyframes su{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .ch{padding:9px 16px;border-bottom:1px solid var(--bd);display:flex;align-items:center}
 .ct{font-size:.56em;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
 .cb{padding:22px}
-
 .fe{font-size:5.5em;line-height:1;text-align:center;display:block}
 .ci{width:100%;max-height:210px;object-fit:cover;border-radius:2px;display:block}
 .cpt{font-family:'Syne',sans-serif;font-size:2.2em;font-weight:800;text-align:center;color:var(--w)}
-audio{width:100%;accent-color:var(--gold)}
 .ei{color:var(--mu);font-size:.8em;text-align:center;padding:6px}
-
 .bh{background:transparent;border:1px solid var(--bd);color:var(--mu2);padding:15px;font-size:.82em;letter-spacing:.05em;margin:16px 0 28px;border-radius:3px}
 .bh:hover{border-color:var(--gold2);color:var(--gold)}
-
 .acts{display:flex;flex-direction:column;gap:8px}
 .bc{background:var(--w);color:var(--bg);padding:20px;font-size:.95em;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:.04em;border-radius:3px}
 .bc:hover{background:var(--gold)}
 .bsk{background:transparent;border:1px solid var(--bd);color:var(--mu);padding:14px;font-size:.82em;border-radius:3px}
 .bsk:hover{color:var(--w);border-color:var(--mu)}
-
-/* ── RESULT ── */
 .rw{width:100%;max-width:520px;text-align:center;padding-top:48px}
 .ri{font-size:3.2em;margin-bottom:18px;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
@@ -88,8 +74,6 @@ audio{width:100%;accent-color:var(--gold)}
 .tok{background:rgba(82,183,136,.12);color:var(--gl);border:1px solid rgba(82,183,136,.25)}
 .tno{background:rgba(248,113,113,.1);color:var(--rl);border:1px solid rgba(248,113,113,.22)}
 .ra{display:flex;flex-direction:column;gap:8px}
-
-/* ── END ── */
 .ew{width:100%;max-width:520px;text-align:center;padding-top:72px}
 .es{font-family:'Syne',sans-serif;font-size:5.5em;font-weight:800;color:var(--gold);line-height:1}
 .el{font-size:.85em;color:var(--mu2);margin-top:8px;margin-bottom:52px}
@@ -99,46 +83,43 @@ audio{width:100%;accent-color:var(--gold)}
 <div id="app"></div>
 <script>
 const C=[
-  {n:"España",cap:"Madrid",flag:"🇪🇸",monument:"Sagrada_Familia_01.jpg",mn:"Sagrada Família",food:"Paella_mixta.jpg",fn:"Paella",anthem:"https://upload.wikimedia.org/wikipedia/commons/7/7b/Spain_National_Anthem_%28instrumental%29.ogg"},
-  {n:"Francia",cap:"París",flag:"🇫🇷",monument:"Eiffel_Tower_from_Champ_de_Mars.jpg",mn:"Torre Eiffel",food:"Croissant_au_beurre.jpg",fn:"Croissant",anthem:"https://upload.wikimedia.org/wikipedia/commons/1/18/La_Marseillaise.ogg"},
-  {n:"Italia",cap:"Roma",flag:"🇮🇹",monument:"Colosseo_2020.jpg",mn:"Coliseo Romano",food:"Pizza-3007395.jpg",fn:"Pizza",anthem:"https://upload.wikimedia.org/wikipedia/commons/5/5e/Inno_di_Mameli_instrumental.ogg"},
-  {n:"Alemania",cap:"Berlín",flag:"🇩🇪",monument:"Brandenburger_Tor_abends.jpg",mn:"Puerta de Brandeburgo",food:"Pretzel_1.jpg",fn:"Pretzel",anthem:"https://upload.wikimedia.org/wikipedia/commons/3/3f/Deutschlandlied_Instrumental.ogg"},
-  {n:"Reino Unido",cap:"Londres",flag:"🇬🇧",monument:"Big_Ben_2023.jpg",mn:"Big Ben",food:"Fish_and_chips_blackpool.jpg",fn:"Fish & Chips",anthem:"https://upload.wikimedia.org/wikipedia/commons/5/5b/God_Save_the_Queen.ogg"},
-  {n:"Estados Unidos",cap:"Washington D.C.",flag:"🇺🇸",monument:"Statue_of_Liberty_7.jpg",mn:"Estatua de la Libertad",food:"Hamburger-2763872.jpg",fn:"Hamburguesa",anthem:"https://upload.wikimedia.org/wikipedia/commons/8/8b/The_Star-Spangled_Banner_instrumental.ogg"},
-  {n:"Brasil",cap:"Brasilia",flag:"🇧🇷",monument:"Christ_on_Corcovado_mountain.jpg",mn:"Cristo Redentor",food:"Feijoada_2009.jpg",fn:"Feijoada",anthem:"https://upload.wikimedia.org/wikipedia/commons/1/16/Hino_Nacional_Brasileiro_instrumental.ogg"},
-  {n:"Argentina",cap:"Buenos Aires",flag:"🇦🇷",monument:"Obelisco_de_Buenos_Aires.jpg",mn:"Obelisco de Buenos Aires",food:"Asado_en_Argentina.jpg",fn:"Asado",anthem:"https://upload.wikimedia.org/wikipedia/commons/b/be/Argentina_Himno_Nacional_Argentino.ogg"},
-  {n:"México",cap:"Ciudad de México",flag:"🇲🇽",monument:"Pyramid_of_the_Moon_from_Pyramid_of_the_Sun.jpg",mn:"Pirámide de Teotihuacán",food:"Tacos_de_carnitas.jpg",fn:"Tacos",anthem:"https://upload.wikimedia.org/wikipedia/commons/8/8b/Mexico_national_anthem.ogg"},
-  {n:"Japón",cap:"Tokio",flag:"🇯🇵",monument:"Mount_Fuji_from_Hotel_Mt_Fuji_2.jpg",mn:"Monte Fuji",food:"Sushi_by_Nikita_Kashner.jpg",fn:"Sushi",anthem:"https://upload.wikimedia.org/wikipedia/commons/5/5c/Kimigayo_instrumental.ogg"},
-  {n:"China",cap:"Pekín",flag:"🇨🇳",monument:"Great_Wall_of_China_July_2006.jpg",mn:"Gran Muralla China",food:"Peking_duck.jpg",fn:"Pato Pekín",anthem:"https://upload.wikimedia.org/wikipedia/commons/7/74/March_of_the_Volunteers_instrumental.ogg"},
-  {n:"India",cap:"Nueva Delhi",flag:"🇮🇳",monument:"Taj_Mahal_2012.jpg",mn:"Taj Mahal",food:"Chicken_tikka_masala.jpg",fn:"Pollo Tikka Masala",anthem:"https://upload.wikimedia.org/wikipedia/commons/7/7e/Jana_Gana_Mana_instrumental.ogg"},
-  {n:"Rusia",cap:"Moscú",flag:"🇷🇺",monument:"Saint_Basil%27s_Cathedral_and_Red_Square.jpg",mn:"Catedral de San Basilio",food:"Borscht_served.jpg",fn:"Borscht",anthem:"https://upload.wikimedia.org/wikipedia/commons/e/e3/Russia_Anthem.ogg"},
-  {n:"Australia",cap:"Canberra",flag:"🇦🇺",monument:"Opera_House_Syd.jpg",mn:"Ópera de Sídney",food:"Meat_pie_with_sauce.jpg",fn:"Meat Pie",anthem:"https://upload.wikimedia.org/wikipedia/commons/0/08/Advance_Australia_Fair_instrumental.ogg"},
-  {n:"Canadá",cap:"Ottawa",flag:"🇨🇦",monument:"CN_Tower_2007.jpg",mn:"Torre CN",food:"Poutine_dish.jpg",fn:"Poutine",anthem:"https://upload.wikimedia.org/wikipedia/commons/f/f5/O_Canada_instrumental.ogg"},
-  {n:"Egipto",cap:"El Cairo",flag:"🇪🇬",monument:"Great_Sphinx_of_Giza_-_20080716a.jpg",mn:"Gran Esfinge de Giza",food:"Koshari_by_Raghda_Hamdy.jpg",fn:"Koshari",anthem:"https://upload.wikimedia.org/wikipedia/commons/0/05/Egypt_National_Anthem_Instrumental.ogg"},
-  {n:"Sudáfrica",cap:"Pretoria",flag:"🇿🇦",monument:"Table_Mountain_DanieVDM.jpg",mn:"Montaña de la Mesa",food:"Braai_South_Africa.jpg",fn:"Braai",anthem:"https://upload.wikimedia.org/wikipedia/commons/9/9f/National_Anthem_of_South_Africa.ogg"},
-  {n:"Marruecos",cap:"Rabat",flag:"🇲🇦",monument:"Koutoubia_Mosque_in_Marrakesh.jpg",mn:"Mezquita Koutoubia",food:"Tagine_of_chicken_with_olives.jpg",fn:"Tagine",anthem:"https://upload.wikimedia.org/wikipedia/commons/4/44/Morocco_National_Anthem.ogg"},
-  {n:"Turquía",cap:"Ankara",flag:"🇹🇷",monument:"Hagia_Sophia_Mars_2013.jpg",mn:"Santa Sofía",food:"Doner_kebab_2.jpg",fn:"Döner Kebab",anthem:"https://upload.wikimedia.org/wikipedia/commons/6/62/Turkish_march_instrumental.ogg"},
-  {n:"Grecia",cap:"Atenas",flag:"🇬🇷",monument:"The_Parthenon_in_Athens.jpg",mn:"Partenón",food:"Greek_salad.jpg",fn:"Ensalada Griega",anthem:"https://upload.wikimedia.org/wikipedia/commons/4/4b/Hymn_to_Liberty.ogg"},
-  {n:"Portugal",cap:"Lisboa",flag:"🇵🇹",monument:"Torre_de_Belem_April_2009-1.jpg",mn:"Torre de Belém",food:"Bacalhau_a_Gomes_de_Sa.jpg",fn:"Bacalhau",anthem:"https://upload.wikimedia.org/wikipedia/commons/4/42/A_Portuguesa_instrumental.ogg"},
-  {n:"Países Bajos",cap:"Ámsterdam",flag:"🇳🇱",monument:"Rijksmuseum_2014.jpg",mn:"Rijksmuseum",food:"Stroopwafels_01.jpg",fn:"Stroopwafel",anthem:"https://upload.wikimedia.org/wikipedia/commons/b/b2/Het_Wilhelmus_instrumental.ogg"},
-  {n:"Suecia",cap:"Estocolmo",flag:"🇸🇪",monument:"Stockholm_city_hall_2005.jpg",mn:"Ayuntamiento de Estocolmo",food:"Swedish_meatballs_with_pasta.jpg",fn:"Albóndigas Suecas",anthem:"https://upload.wikimedia.org/wikipedia/commons/4/4f/Du_Gamla_Du_Fria_instrumental.ogg"},
-  {n:"Colombia",cap:"Bogotá",flag:"🇨🇴",monument:"Castillo_San_Felipe_de_Barajas.jpg",mn:"Castillo San Felipe de Barajas",food:"Bandeja_paisa.jpg",fn:"Bandeja Paisa",anthem:"https://upload.wikimedia.org/wikipedia/commons/f/f4/Colombia_Himno_Nacional.ogg"},
-  {n:"Nigeria",cap:"Abuya",flag:"🇳🇬",monument:"Zuma_Rock.jpg",mn:"Zuma Rock",food:"Jollof_rice_from_olusegun.jpg",fn:"Jollof Rice",anthem:"https://upload.wikimedia.org/wikipedia/commons/e/e4/Nigeria_National_Anthem.ogg"},
-  {n:"Kenya",cap:"Nairobi",flag:"🇰🇪",monument:"Mount_Kenya_glacier.jpg",mn:"Monte Kenia",food:"Ugali_with_sukuma_wiki.jpg",fn:"Ugali",anthem:"https://upload.wikimedia.org/wikipedia/commons/6/62/Kenya_National_Anthem.ogg"},
-  {n:"Arabia Saudí",cap:"Riad",flag:"🇸🇦",monument:"Masmak_fortress.jpg",mn:"Fortaleza Masmak",food:"Kabsa_rice.jpg",fn:"Kabsa",anthem:"https://upload.wikimedia.org/wikipedia/commons/9/9c/Saudi_Arabia_National_Anthem.ogg"},
-  {n:"Indonesia",cap:"Yakarta",flag:"🇮🇩",monument:"Borobudur_ship.jpg",mn:"Templo de Borobudur",food:"Nasi_goreng_2.jpg",fn:"Nasi Goreng",anthem:"https://upload.wikimedia.org/wikipedia/commons/3/34/Indonesia_Raya_Instrumental.ogg"},
-  {n:"Perú",cap:"Lima",flag:"🇵🇪",monument:"Machu_Picchu%2C_Peru.jpg",mn:"Machu Picchu",food:"Ceviche_de_pescado.jpg",fn:"Ceviche",anthem:"https://upload.wikimedia.org/wikipedia/commons/c/c6/Peru_Himno_Nacional.ogg"},
-  {n:"Nueva Zelanda",cap:"Wellington",flag:"🇳🇿",monument:"Milford_Sound_Mitre_Peak.jpg",mn:"Fiordos de Milford Sound",food:"Pavlova-Dessert.jpg",fn:"Pavlova",anthem:"https://upload.wikimedia.org/wikipedia/commons/c/c7/God_Defend_New_Zealand_instrumental.ogg"}
+  {n:"España",cap:"Madrid",flag:"🇪🇸",mt:"Sagrada Familia",mn:"Sagrada Família",ft:"Paella",fn:"Paella"},
+  {n:"Francia",cap:"París",flag:"🇫🇷",mt:"Eiffel Tower",mn:"Torre Eiffel",ft:"Croissant",fn:"Croissant"},
+  {n:"Italia",cap:"Roma",flag:"🇮🇹",mt:"Colosseum",mn:"Coliseo Romano",ft:"Pizza",fn:"Pizza"},
+  {n:"Alemania",cap:"Berlín",flag:"🇩🇪",mt:"Brandenburg Gate",mn:"Puerta de Brandeburgo",ft:"Pretzel",fn:"Pretzel"},
+  {n:"Reino Unido",cap:"Londres",flag:"🇬🇧",mt:"Big Ben",mn:"Big Ben",ft:"Fish and chips",fn:"Fish & Chips"},
+  {n:"Estados Unidos",cap:"Washington D.C.",flag:"🇺🇸",mt:"Statue of Liberty",mn:"Estatua de la Libertad",ft:"Hamburger",fn:"Hamburguesa"},
+  {n:"Brasil",cap:"Brasilia",flag:"🇧🇷",mt:"Christ the Redeemer",mn:"Cristo Redentor",ft:"Feijoada",fn:"Feijoada"},
+  {n:"Argentina",cap:"Buenos Aires",flag:"🇦🇷",mt:"Obelisco de Buenos Aires",mn:"Obelisco de Buenos Aires",ft:"Asado",fn:"Asado"},
+  {n:"México",cap:"Ciudad de México",flag:"🇲🇽",mt:"Pyramid of the Sun",mn:"Pirámide de Teotihuacán",ft:"Taco",fn:"Tacos"},
+  {n:"Japón",cap:"Tokio",flag:"🇯🇵",mt:"Mount Fuji",mn:"Monte Fuji",ft:"Sushi",fn:"Sushi"},
+  {n:"China",cap:"Pekín",flag:"🇨🇳",mt:"Great Wall of China",mn:"Gran Muralla China",ft:"Peking duck",fn:"Pato Pekín"},
+  {n:"India",cap:"Nueva Delhi",flag:"🇮🇳",mt:"Taj Mahal",mn:"Taj Mahal",ft:"Chicken tikka masala",fn:"Pollo Tikka Masala"},
+  {n:"Rusia",cap:"Moscú",flag:"🇷🇺",mt:"Saint Basil's Cathedral",mn:"Catedral de San Basilio",ft:"Borscht",fn:"Borscht"},
+  {n:"Australia",cap:"Canberra",flag:"🇦🇺",mt:"Sydney Opera House",mn:"Ópera de Sídney",ft:"Meat pie",fn:"Meat Pie"},
+  {n:"Canadá",cap:"Ottawa",flag:"🇨🇦",mt:"CN Tower",mn:"Torre CN",ft:"Poutine",fn:"Poutine"},
+  {n:"Egipto",cap:"El Cairo",flag:"🇪🇬",mt:"Great Sphinx of Giza",mn:"Gran Esfinge de Giza",ft:"Koshari",fn:"Koshari"},
+  {n:"Sudáfrica",cap:"Pretoria",flag:"🇿🇦",mt:"Table Mountain",mn:"Montaña de la Mesa",ft:"Braai",fn:"Braai"},
+  {n:"Marruecos",cap:"Rabat",flag:"🇲🇦",mt:"Koutoubia Mosque",mn:"Mezquita Koutoubia",ft:"Tajine",fn:"Tagine"},
+  {n:"Turquía",cap:"Ankara",flag:"🇹🇷",mt:"Hagia Sophia",mn:"Santa Sofía",ft:"Doner kebab",fn:"Döner Kebab"},
+  {n:"Grecia",cap:"Atenas",flag:"🇬🇷",mt:"Parthenon",mn:"Partenón",ft:"Greek salad",fn:"Ensalada Griega"},
+  {n:"Portugal",cap:"Lisboa",flag:"🇵🇹",mt:"Tower of Belem",mn:"Torre de Belém",ft:"Bacalhau",fn:"Bacalhau"},
+  {n:"Países Bajos",cap:"Ámsterdam",flag:"🇳🇱",mt:"Rijksmuseum",mn:"Rijksmuseum",ft:"Stroopwafel",fn:"Stroopwafel"},
+  {n:"Suecia",cap:"Estocolmo",flag:"🇸🇪",mt:"Stockholm City Hall",mn:"Ayuntamiento de Estocolmo",ft:"Swedish meatballs",fn:"Albóndigas Suecas"},
+  {n:"Colombia",cap:"Bogotá",flag:"🇨🇴",mt:"Castillo San Felipe de Barajas",mn:"Castillo San Felipe",ft:"Bandeja paisa",fn:"Bandeja Paisa"},
+  {n:"Nigeria",cap:"Abuya",flag:"🇳🇬",mt:"Zuma Rock",mn:"Zuma Rock",ft:"Jollof rice",fn:"Jollof Rice"},
+  {n:"Kenya",cap:"Nairobi",flag:"🇰🇪",mt:"Mount Kenya",mn:"Monte Kenia",ft:"Ugali",fn:"Ugali"},
+  {n:"Arabia Saudí",cap:"Riad",flag:"🇸🇦",mt:"Masmak Fortress",mn:"Fortaleza Masmak",ft:"Kabsa",fn:"Kabsa"},
+  {n:"Indonesia",cap:"Yakarta",flag:"🇮🇩",mt:"Borobudur",mn:"Templo de Borobudur",ft:"Nasi goreng",fn:"Nasi Goreng"},
+  {n:"Perú",cap:"Lima",flag:"🇵🇪",mt:"Machu Picchu",mn:"Machu Picchu",ft:"Ceviche",fn:"Ceviche"},
+  {n:"Nueva Zelanda",cap:"Wellington",flag:"🇳🇿",mt:"Milford Sound",mn:"Fiordos de Milford Sound",ft:"Pavlova",fn:"Pavlova"}
 ];
-
 const CONTS={"Europa":["España","Francia","Italia","Alemania","Reino Unido","Portugal","Países Bajos","Suecia","Grecia"],"América":["Estados Unidos","Brasil","Argentina","México","Colombia","Perú","Canadá"],"Asia":["Japón","China","India","Rusia","Turquía","Arabia Saudí","Indonesia"],"África":["Egipto","Sudáfrica","Marruecos","Nigeria","Kenya"],"Oceanía":["Australia","Nueva Zelanda"]};
-const DEFS=[{k:"flag",l:"Bandera"},{k:"monument",l:"Monumento"},{k:"food",l:"Comida típica"},{k:"capital",l:"Capital"},{k:"anthem",l:"Himno nacional"}];
-const WIKI=f=>`https://en.wikipedia.org/w/api.php?action=query&titles=File:${f}&prop=imageinfo&iiprop=url&format=json&origin=*`;
+const DEFS=[{k:"flag",l:"Bandera"},{k:"monument",l:"Monumento"},{k:"food",l:"Comida típica"},{k:"capital",l:"Capital"}];
+const WIKI=t=>`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(t)}&prop=pageimages&pithumbsize=600&format=json&origin=*`;
 const sh=a=>[...a].sort(()=>Math.random()-.5);
-
 let S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{}};
 const app=document.getElementById('app');
-
 function home(){
   S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{}};
   const co=Object.keys(CONTS).map(c=>`<option>${c}</option>`).join('');
@@ -155,18 +136,15 @@ function home(){
 <div class="sr"><select id="sp">${po}</select><button class="btn bx" onclick="go('p',document.getElementById('sp').value)">Jugar</button></div>
 </div>`;
 }
-
 function go(mode,val){
   const pool=mode==='r'?sh(C):mode==='c'?sh(C.filter(c=>CONTS[val]?.includes(c.n))):C.filter(c=>c.n===val);
   S={...S,pool,score:0,total:0};next();
 }
-
 async function next(){
   if(!S.pool.length){end();return;}
   S.cur=S.pool.shift();S.order=sh(DEFS);S.ci=0;S.cache={};
   await render();
 }
-
 async function render(){
   const ci=S.ci,tot=S.order.length;
   let html='';
@@ -189,32 +167,34 @@ ${ci<tot-1?`<button class="btn bh" onclick="more()">+ Siguiente pista</button>`:
 </div>
 </div>`;
 }
-
 async function clue(def){
   const c=S.cur,{k,l}=def;
   let b='';
   if(k==='flag') b=`<span class="fe">${c.flag}</span>`;
   else if(k==='capital') b=`<div class="cpt">${c.cap}</div>`;
-  else if(k==='anthem') b=`<audio controls src="${c.anthem}"></audio>`;
   else{
-    const f=k==='monument'?c.monument:c.food;
+    const term=k==='monument'?c.mt:c.ft;
     const name=k==='monument'?c.mn:c.fn;
-    const u=await img(f);
+    const u=await img(term);
     const imgTag=u?`<img class="ci" src="${u}" onerror="this.outerHTML='<p class=ei>—</p>'">`:`<p class="ei">Cargando…</p>`;
     b=imgTag+`<div style="text-align:center;margin-top:12px;font-size:.8em;color:var(--mu2);letter-spacing:.06em">${name}</div>`;
   }
   return`<div class="cc"><div class="ch"><span class="ct">${l}</span></div><div class="cb">${b}</div></div>`;
 }
-
-async function img(f){
-  if(S.cache[f]) return S.cache[f];
-  try{const r=await fetch(WIKI(f));const d=await r.json();const p=d.query.pages;const u=p[Object.keys(p)[0]]?.imageinfo?.[0]?.url||null;S.cache[f]=u;return u;}catch{return null;}
+async function img(term){
+  if(S.cache[term]) return S.cache[term];
+  try{
+    const r=await fetch(WIKI(term));
+    const d=await r.json();
+    const p=d.query.pages;
+    const u=p[Object.keys(p)[0]]?.thumbnail?.source||null;
+    S.cache[term]=u;
+    return u;
+  }catch{return null;}
 }
-
 async function more(){if(S.ci<S.order.length-1){S.ci++;await render();}}
 function ok(){S.score++;S.total++;result(true);}
 function skip(){S.total++;result(false);}
-
 function result(win){
   const c=S.cur;
   app.innerHTML=`<div class="rw">
@@ -228,7 +208,6 @@ function result(win){
 <button class="btn bsk" style="margin-top:4px" onclick="home()">Inicio</button>
 </div></div>`;
 }
-
 function end(){
   app.innerHTML=`<div class="ew">
 <div class="eyebrow">Fin de la partida</div>
@@ -237,7 +216,6 @@ function end(){
 <button class="btn bm" onclick="home()">Jugar de nuevo</button>
 </div>`;
 }
-
 home();
 </script>
 </body>
