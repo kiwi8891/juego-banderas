@@ -187,11 +187,11 @@ if(pct>=30)return{f:“😐😐”,m:“Puedes mejorar”};
 return{f:“😢”,m:”¡A practicar!”};
 }
 
-let S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},curM:null,curMN:null,curF:null,curFN:null};
+let S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{}};
 const app=document.getElementById(‘app’);
 
 function home(){
-S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},curM:null,curMN:null,curF:null,curFN:null};
+S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{}};
 const co=Object.keys(CONTS).map(c=>`<option>${c}</option>`).join(’’);
 const po=[…C].sort((a,b)=>a.n.localeCompare(b.n,‘es’)).map(c=>`<option value="${c.n}">${c.flag} ${c.n}</option>`).join(’’);
 app.innerHTML=`<div class="hw">
@@ -256,9 +256,14 @@ let b=’’;
 if(k===‘flag’) b=`<span class="fe">${c.flag}</span>`;
 else if(k===‘capital’) b=`<div class="cpt">${c.cap}</div>`;
 else{
-const term=k===‘monument’?S.curM:S.curF;
-const name=k===‘monument’?S.curMN:S.curFN;
-const u=await getImg(term);
+const terms=k===‘monument’?c.ms:c.fs;
+const names=k===‘monument’?c.mns:c.fns;
+// Try each term until one returns an image
+let u=null,name=names[0];
+for(let i=0;i<terms.length;i++){
+u=await getImg(terms[i]);
+if(u){name=names[i];break;}
+}
 const imgTag=u?`<div class="ci-wrap"><img class="ci" src="${u}" onerror="this.parentNode.outerHTML='<p class=ei>Imagen no disponible</p>'"></div>`:`<p class="ei">Imagen no disponible</p>`;
 b=imgTag+`<div class="iname">${name}</div>`;
 }
@@ -266,7 +271,7 @@ return`<div class="cc"><div class="ch"><span class="ct">${l}</span></div><div cl
 }
 
 async function getImg(term){
-if(S.cache[term]) return S.cache[term];
+if(term in S.cache) return S.cache[term];
 try{
 const r=await fetch(WIKI(term));
 const d=await r.json();
@@ -274,7 +279,7 @@ const p=d.query.pages;
 const u=p[Object.keys(p)[0]]?.thumbnail?.source||null;
 S.cache[term]=u;
 return u;
-}catch{return null;}
+}catch{S.cache[term]=null;return null;}
 }
 
 async function more(){if(S.ci<S.order.length-1){S.ci++;await render();}}
