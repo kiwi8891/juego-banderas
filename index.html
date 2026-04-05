@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -172,27 +173,29 @@ const C=[
    fs:["Pavlova","Hangi","Meat pie"],fns:["Pavlova","Hangi","Meat Pie"]}
 ];
 
-const CONTS={"Europa":["España","Francia","Italia","Alemania","Reino Unido","Portugal","Países Bajos","Suecia","Grecia"],"América":["Estados Unidos","Brasil","Argentina","México","Colombia","Perú","Canadá"],"Asia":["Japón","China","India","Rusia","Turquía","Arabia Saudí","Indonesia"],"África":["Egipto","Sudáfrica","Marruecos","Nigeria","Kenya"],"Oceanía":["Australia","Nueva Zelanda"]};
-const DEFS=[{k:"flag",l:"Bandera"},{k:"monument",l:"Monumento"},{k:"food",l:"Comida típica"},{k:"capital",l:"Capital"}];
+const CONTS={“Europa”:[“España”,“Francia”,“Italia”,“Alemania”,“Reino Unido”,“Portugal”,“Países Bajos”,“Suecia”,“Grecia”],“América”:[“Estados Unidos”,“Brasil”,“Argentina”,“México”,“Colombia”,“Perú”,“Canadá”],“Asia”:[“Japón”,“China”,“India”,“Rusia”,“Turquía”,“Arabia Saudí”,“Indonesia”],“África”:[“Egipto”,“Sudáfrica”,“Marruecos”,“Nigeria”,“Kenya”],“Oceanía”:[“Australia”,“Nueva Zelanda”]};
+const DEFS=[{k:“flag”,l:“Bandera”},{k:“monument”,l:“Monumento”},{k:“food”,l:“Comida típica”},{k:“capital”,l:“Capital”}];
 const WIKI=t=>`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(t)}&prop=pageimages&pithumbsize=600&format=json&origin=*`;
-const sh=a=>[...a].sort(()=>Math.random()-.5);
+const sh=a=>[…a].sort(()=>Math.random()-.5);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
 
 function faces(pct){
-  if(pct>=90)return{f:"🤩🤩🤩🤩🤩",m:"¡Increíble, Nil!"};
-  if(pct>=70)return{f:"😄😄😄😄",m:"¡Muy bien!"};
-  if(pct>=50)return{f:"🙂🙂🙂",m:"¡Bien!"};
-  if(pct>=30)return{f:"😐😐",m:"Puedes mejorar"};
-  return{f:"😢",m:"¡A practicar!"};
+if(pct>=90)return{f:“🤩🤩🤩🤩🤩”,m:”¡Increíble, Nil!”};
+if(pct>=70)return{f:“😄😄😄😄”,m:”¡Muy bien!”};
+if(pct>=50)return{f:“🙂🙂🙂”,m:”¡Bien!”};
+if(pct>=30)return{f:“😐😐”,m:“Puedes mejorar”};
+return{f:“😢”,m:”¡A practicar!”};
 }
 
 let S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},curM:null,curMN:null,curF:null,curFN:null};
-const app=document.getElementById('app');
+const app=document.getElementById(‘app’);
 
 function home(){
-  S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},curM:null,curMN:null,curF:null,curFN:null};
-  const co=Object.keys(CONTS).map(c=>`<option>${c}</option>`).join('');
-  const po=[...C].sort((a,b)=>a.n.localeCompare(b.n,'es')).map(c=>`<option value="${c.n}">${c.flag} ${c.n}</option>`).join('');
-  app.innerHTML=`<div class="hw">
+S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},curM:null,curMN:null,curF:null,curFN:null};
+const co=Object.keys(CONTS).map(c=>`<option>${c}</option>`).join(’’);
+const po=[…C].sort((a,b)=>a.n.localeCompare(b.n,‘es’)).map(c=>`<option value="${c.n}">${c.flag} ${c.n}</option>`).join(’’);
+app.innerHTML=`<div class="hw">
+
 <div class="eyebrow">Juego de geografía</div>
 <div class="ht">¿Qué<br>país es?</div>
 <div class="hs">Para Nil — adivina el país con las pistas</div>
@@ -206,27 +209,29 @@ function home(){
 }
 
 function go(mode,val){
-  const pool=mode==='r'?sh(C):mode==='c'?sh(C.filter(c=>CONTS[val]?.includes(c.n))):C.filter(c=>c.n===val);
-  S={...S,pool,score:0,total:0};next();
+const pool=mode===‘r’?sh(C):mode===‘c’?sh(C.filter(c=>CONTS[val]?.includes(c.n))):C.filter(c=>c.n===val);
+S={…S,pool,score:0,total:0};next();
 }
 
 async function next(){
-  if(!S.pool.length){end();return;}
-  S.cur=S.pool.shift();
-  S.order=sh(DEFS);S.ci=0;S.cache={};
-  const mi=Math.floor(Math.random()*S.cur.ms.length);
-  const fi=Math.floor(Math.random()*S.cur.fs.length);
-  S.curM=S.cur.ms[mi];S.curMN=S.cur.mns[mi];
-  S.curF=S.cur.fs[fi];S.curFN=S.cur.fns[fi];
-  await render();
+if(!S.pool.length){end();return;}
+S.cur=S.pool.shift();
+S.order=sh(DEFS);S.ci=0;S.cache={};
+// Pick random monument and food for this round
+const mi=Math.floor(Math.random()*S.cur.ms.length);
+const fi=Math.floor(Math.random()*S.cur.fs.length);
+S.curM=S.cur.ms[mi];S.curMN=S.cur.mns[mi];
+S.curF=S.cur.fs[fi];S.curFN=S.cur.fns[fi];
+await render();
 }
 
 async function render(){
-  const ci=S.ci,tot=S.order.length;
-  let html='';
-  for(let i=0;i<=ci;i++) html+=await clue(S.order[i]);
-  const dots=S.order.map((_,i)=>`<div class="dot ${i<ci?'was':i===ci?'on':''}"></div>`).join('');
-  app.innerHTML=`<div class="gw">
+const ci=S.ci,tot=S.order.length;
+let html=’’;
+for(let i=0;i<=ci;i++) html+=await clue(S.order[i]);
+const dots=S.order.map((_,i)=>`<div class="dot ${i<ci?'was':i===ci?'on':''}"></div>`).join(’’);
+app.innerHTML=`<div class="gw">
+
 <div class="topbar">
 <div class="si"><div class="sn">${S.score}</div><div class="sk">Aciertos</div></div>
 <div class="sdv"></div>
@@ -246,30 +251,30 @@ ${ci<tot-1?`<button class="btn bh" onclick="more()">+ Siguiente pista</button>`:
 }
 
 async function clue(def){
-  const c=S.cur,{k,l}=def;
-  let b='';
-  if(k==='flag') b=`<span class="fe">${c.flag}</span>`;
-  else if(k==='capital') b=`<div class="cpt">${c.cap}</div>`;
-  else{
-    const term=k==='monument'?S.curM:S.curF;
-    const name=k==='monument'?S.curMN:S.curFN;
-    const u=await getImg(term);
-    const imgTag=u?`<div class="ci-wrap"><img class="ci" src="${u}" onerror="this.parentNode.outerHTML='<p class=ei>Imagen no disponible</p>'"></div>`:`<p class="ei">Imagen no disponible</p>`;
-    b=imgTag+`<div class="iname">${name}</div>`;
-  }
-  return`<div class="cc"><div class="ch"><span class="ct">${l}</span></div><div class="cb">${b}</div></div>`;
+const c=S.cur,{k,l}=def;
+let b=’’;
+if(k===‘flag’) b=`<span class="fe">${c.flag}</span>`;
+else if(k===‘capital’) b=`<div class="cpt">${c.cap}</div>`;
+else{
+const term=k===‘monument’?S.curM:S.curF;
+const name=k===‘monument’?S.curMN:S.curFN;
+const u=await getImg(term);
+const imgTag=u?`<div class="ci-wrap"><img class="ci" src="${u}" onerror="this.parentNode.outerHTML='<p class=ei>Imagen no disponible</p>'"></div>`:`<p class="ei">Imagen no disponible</p>`;
+b=imgTag+`<div class="iname">${name}</div>`;
+}
+return`<div class="cc"><div class="ch"><span class="ct">${l}</span></div><div class="cb">${b}</div></div>`;
 }
 
 async function getImg(term){
-  if(S.cache[term]) return S.cache[term];
-  try{
-    const r=await fetch(WIKI(term));
-    const d=await r.json();
-    const p=d.query.pages;
-    const u=p[Object.keys(p)[0]]?.thumbnail?.source||null;
-    S.cache[term]=u;
-    return u;
-  }catch{return null;}
+if(S.cache[term]) return S.cache[term];
+try{
+const r=await fetch(WIKI(term));
+const d=await r.json();
+const p=d.query.pages;
+const u=p[Object.keys(p)[0]]?.thumbnail?.source||null;
+S.cache[term]=u;
+return u;
+}catch{return null;}
 }
 
 async function more(){if(S.ci<S.order.length-1){S.ci++;await render();}}
@@ -277,8 +282,9 @@ function ok(){S.score++;S.total++;result(true);}
 function skip(){S.total++;result(false);}
 
 function result(win){
-  const c=S.cur;
-  app.innerHTML=`<div class="rw">
+const c=S.cur;
+app.innerHTML=`<div class="rw">
+
 <div class="ri">${win?'🎉':'🌍'}</div>
 <div class="rf">${c.flag}</div>
 <div class="rn">${c.n}</div>
@@ -292,10 +298,11 @@ function result(win){
 }
 
 function end(){
-  if(S.total===0){home();return;}
-  const pct=Math.round(S.score/S.total*100);
-  const{f,m}=faces(pct);
-  app.innerHTML=`<div class="ew">
+if(S.total===0){home();return;}
+const pct=Math.round(S.score/S.total*100);
+const{f,m}=faces(pct);
+app.innerHTML=`<div class="ew">
+
 <div class="eyebrow">Fin de la partida</div>
 <div class="efaces">${f}</div>
 <div class="es">${S.score}/${S.total}</div>
@@ -307,5 +314,6 @@ function end(){
 
 home();
 </script>
+
 </body>
 </html>
