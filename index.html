@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>¿Qué país es?</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080808;--s1:#141414;--bd:#2a2a2a;--gold:#c8a96e;--gold2:#8a7049;
+  --w:#ffffff;--mu:#888;--mu2:#aaa;--gl:#52b788;--rl:#f87171;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100vh;background:var(--bg);color:var(--w);font-family:"DM Sans",sans-serif;overflow-x:hidden;text-transform:uppercase;font-weight:600;font-size:17px}
+body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(200,169,110,.07) 0%,transparent 70%);pointer-events:none;z-index:0}
+#app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 24px 64px}
+.hw{width:100%;max-width:520px}
+.eyebrow{font-size:.65em;font-weight:800;letter-spacing:.22em;color:var(--gold);margin-bottom:14px}
+.ht{font-family:"Syne",sans-serif;font-size:3.6em;font-weight:800;line-height:.95;margin-bottom:8px}
+.hs{font-size:.9em;color:var(--mu2);font-weight:500;margin-bottom:52px}
+.sl{font-size:.65em;font-weight:800;letter-spacing:.18em;color:var(--mu2);margin-bottom:10px}
+.btn{width:100%;border:none;border-radius:3px;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700}
+.btn:active{transform:scale(.97)}
+.bm{background:var(--w);color:var(--bg);padding:19px 24px;font-size:1em;font-weight:800;font-family:"Syne",sans-serif;letter-spacing:.03em}
+.bm:hover{background:var(--gold)}
+.bx{background:transparent;border:1px solid var(--bd);color:var(--mu2);padding:14px 18px;font-size:.88em;white-space:nowrap;border-radius:3px;font-weight:700}
+.bx:hover{border-color:var(--gold2);color:var(--gold)}
+.div{display:flex;align-items:center;gap:14px;color:var(--mu);font-size:.65em;letter-spacing:.14em;margin:22px 0 18px;font-weight:700}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--bd)}
+.sr{display:flex;gap:8px;margin-bottom:20px}
+select{flex:1;padding:13px 36px 13px 14px;border-radius:3px;border:1px solid var(--bd);background:var(--s1);color:var(--w);font-size:.9em;font-family:"DM Sans",sans-serif;appearance:none;font-weight:600;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.gw{width:100%;max-width:520px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:18px;border-bottom:1px solid var(--bd)}
+.si{text-align:center}
+.sn{font-family:"Syne",sans-serif;font-size:1.8em;font-weight:800;line-height:1}
+.sk{font-size:.6em;color:var(--mu2);letter-spacing:.14em;margin-top:3px;font-weight:700}
+.sdv{width:1px;height:36px;background:var(--bd)}
+.dots{display:flex;gap:5px;justify-content:center;margin-bottom:28px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--bd);transition:all .35s}
+.dot.on{background:var(--gold);box-shadow:0 0 10px rgba(200,169,110,.5);transform:scale(1.4)}
+.dot.was{background:var(--gold2)}
+.cc{background:var(--s1);border:1px solid var(--bd);border-radius:4px;overflow:hidden;margin-bottom:8px;animation:su .28s ease}
+@keyframes su{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.ch{padding:10px 16px;border-bottom:1px solid var(--bd);display:flex;align-items:center}
+.ct{font-size:.62em;font-weight:800;letter-spacing:.2em;color:var(--mu2)}
+.cb{padding:22px}
+.fe{font-size:10em;line-height:1;text-align:center;display:block}
+.ci-wrap{width:100%;background:#000;border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ci{width:100%;height:auto;object-fit:contain;display:block}
+.cpt{font-family:"Syne",sans-serif;font-size:2.2em;font-weight:800;text-align:center}
+.iname{text-align:center;margin-top:12px;font-size:.82em;color:var(--mu2);font-weight:700;letter-spacing:.06em}
+.ei{color:var(--mu);font-size:.85em;text-align:center;padding:6px;font-weight:600}
+.bh{background:transparent;border:1px solid var(--bd);color:var(--mu2);padding:15px;font-size:.88em;letter-spacing:.05em;margin:16px 0 24px;border-radius:3px;font-weight:700}
+.bh:hover{border-color:var(--gold2);color:var(--gold)}
+.acts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.bc{background:var(--w);color:var(--bg);padding:20px;font-size:1em;font-weight:800;font-family:"Syne",sans-serif;letter-spacing:.04em;border-radius:3px}
+.bc:hover{background:var(--gold)}
+.bsk{background:transparent;border:1px solid var(--bd);color:var(--mu2);padding:14px;font-size:.88em;border-radius:3px;font-weight:700}
+.bsk:hover{color:var(--w);border-color:var(--mu2)}
+.bend{background:transparent;border:1px solid #3a1a1a;color:#f87171;padding:13px;font-size:.82em;border-radius:3px;font-weight:700;margin-top:16px}
+.bend:hover{background:#3a1a1a}
+.rw{width:100%;max-width:520px;text-align:center;padding-top:48px}
+.ri{font-size:3.2em;margin-bottom:18px;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.rf{font-size:2.8em;margin-bottom:8px}
+.rn{font-family:"Syne",sans-serif;font-size:2.6em;font-weight:800;line-height:1.05;margin-bottom:6px}
+.rc{font-size:.88em;color:var(--mu2);margin-bottom:28px;font-weight:700}
+.rtag{display:inline-block;padding:6px 16px;border-radius:2px;font-size:.65em;font-weight:800;letter-spacing:.15em;margin-bottom:36px}
+.tok{background:rgba(82,183,136,.12);color:var(--gl);border:1px solid rgba(82,183,136,.3)}
+.tno{background:rgba(248,113,113,.1);color:var(--rl);border:1px solid rgba(248,113,113,.25)}
+.ra{display:flex;flex-direction:column;gap:8px}
+.ew{width:100%;max-width:520px;text-align:center;padding-top:48px}
+.efaces{font-size:2.8em;margin-bottom:20px;letter-spacing:4px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+.es{font-family:"Syne",sans-serif;font-size:4.5em;font-weight:800;color:var(--gold);line-height:1}
+.epct{font-size:1.1em;color:var(--mu2);margin-top:6px;font-weight:700}
+.emsg{font-family:"Syne",sans-serif;font-size:1.3em;font-weight:800;margin:20px 0 36px;line-height:1.3}
+.stars-earned{font-size:1.8em;margin:8px 0 16px;letter-spacing:4px}
+.map-wrap{margin:16px 0;background:var(--s1);border:1px solid var(--bd);border-radius:4px;padding:16px;min-height:60px;display:flex;align-items:center;justify-content:center}
+.estars{font-size:1em;color:var(--gold);margin:8px 0 4px;font-weight:700}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const C=[
+  {n:"España",cap:"Madrid",flag:"🇪🇸",
+   ms:["Sagrada Familia","Alhambra","Park Güell"],mns:["Sagrada Família","La Alhambra","Park Güell"],
+   fs:["Paella","Gazpacho","Churros"],fns:["Paella","Gazpacho","Churros"]},
+  {n:"Francia",cap:"París",flag:"🇫🇷",
+   ms:["Eiffel Tower","Louvre Museum","Palace of Versailles"],mns:["Torre Eiffel","Museo del Louvre","Palacio de Versalles"],
+   fs:["Croissant","French onion soup","Crêpe"],fns:["Croissant","Sopa de Cebolla","Crêpe"]},
+  {n:"Italia",cap:"Roma",flag:"🇮🇹",
+   ms:["Colosseum","Trevi Fountain","Leaning Tower of Pisa"],mns:["Coliseo Romano","Fontana di Trevi","Torre de Pisa"],
+   fs:["Pizza Napoletana","Pasta carbonara","Risotto"],fns:["Pizza","Pasta Carbonara","Risotto"]},
+  {n:"Alemania",cap:"Berlín",flag:"🇩🇪",
+   ms:["Brandenburg Gate","Neuschwanstein Castle","Cologne Cathedral"],mns:["Puerta de Brandeburgo","Castillo Neuschwanstein","Catedral de Colonia"],
+   fs:["Pretzel","Bratwurst","Black Forest cake"],fns:["Pretzel","Bratwurst","Tarta Selva Negra"]},
+  {n:"Reino Unido",cap:"Londres",flag:"🇬🇧",
+   ms:["Big Ben","Tower of London","Stonehenge"],mns:["Big Ben","Torre de Londres","Stonehenge"],
+   fs:["Fish and chips","Full breakfast","Shepherds pie"],fns:["Fish & Chips","Desayuno Inglés","Shepherds Pie"]},
+  {n:"Estados Unidos",cap:"Washington D.C.",flag:"🇺🇸",
+   ms:["Statue of Liberty","Grand Canyon","Golden Gate Bridge"],mns:["Estatua de la Libertad","Gran Cañón","Golden Gate"],
+   fs:["Hamburger","Hot dog","Apple pie"],fns:["Hamburguesa","Hot Dog","Apple Pie"]},
+  {n:"Brasil",cap:"Brasilia",flag:"🇧🇷",
+   ms:["Christ the Redeemer","Iguazu Falls","Amazon River"],mns:["Cristo Redentor","Cataratas del Iguazú","Río Amazonas"],
+   fs:["Feijoada","Brigadeiro","Pão de queijo"],fns:["Feijoada","Brigadeiro","Pão de Queijo"]},
+  {n:"Argentina",cap:"Buenos Aires",flag:"🇦🇷",
+   ms:["Obelisco de Buenos Aires","Perito Moreno Glacier","Iguazu Falls"],mns:["Obelisco de Buenos Aires","Glaciar Perito Moreno","Cataratas del Iguazú"],
+   fs:["Asado","Empanada","Dulce de leche"],fns:["Asado","Empanada","Dulce de Leche"]},
+  {n:"México",cap:"Ciudad de México",flag:"🇲🇽",
+   ms:["Chichen Itza","Pyramid of the Sun","Palacio de Bellas Artes"],mns:["Chichén Itzá","Pirámide del Sol","Palacio de Bellas Artes"],
+   fs:["Taco","Guacamole","Enchilada"],fns:["Tacos","Guacamole","Enchiladas"]},
+  {n:"Japón",cap:"Tokio",flag:"🇯🇵",
+   ms:["Mount Fuji","Fushimi Inari-taisha","Tokyo Tower"],mns:["Monte Fuji","Santuario Fushimi Inari","Torre de Tokio"],
+   fs:["Sushi","Ramen","Tempura"],fns:["Sushi","Ramen","Tempura"]},
+  {n:"China",cap:"Pekín",flag:"🇨🇳",
+   ms:["Great Wall of China","Forbidden City","Li River"],mns:["Gran Muralla China","Ciudad Prohibida","Río Li"],
+   fs:["Peking duck","Dim sum","Kung Pao chicken"],fns:["Pato Pekín","Dim Sum","Kung Pao"]},
+  {n:"India",cap:"Nueva Delhi",flag:"🇮🇳",
+   ms:["Taj Mahal","Amber Fort","Gateway of India"],mns:["Taj Mahal","Fuerte Amber","Puerta de la India"],
+   fs:["Chicken tikka masala","Samosa","Biryani"],fns:["Pollo Tikka Masala","Samosa","Biryani"]},
+  {n:"Rusia",cap:"Moscú",flag:"🇷🇺",
+   ms:["Saint Basil Cathedral","Kremlin","Lake Baikal"],mns:["Catedral de San Basilio","El Kremlin","Lago Baikal"],
+   fs:["Borscht","Beef Stroganoff","Pelmeni"],fns:["Borscht","Stroganoff","Pelmeni"]},
+  {n:"Australia",cap:"Canberra",flag:"🇦🇺",
+   ms:["Sydney Opera House","Uluru","Great Barrier Reef"],mns:["Ópera de Sídney","Uluru","Gran Barrera de Coral"],
+   fs:["Meat pie","Pavlova","Vegemite"],fns:["Meat Pie","Pavlova","Vegemite"]},
+  {n:"Canadá",cap:"Ottawa",flag:"🇨🇦",
+   ms:["CN Tower","Niagara Falls","Banff National Park"],mns:["Torre CN","Cataratas del Niágara","Parque Nacional Banff"],
+   fs:["Poutine","Butter tart","Nanaimo bar"],fns:["Poutine","Butter Tart","Nanaimo Bar"]},
+  {n:"Egipto",cap:"El Cairo",flag:"🇪🇬",
+   ms:["Great Sphinx of Giza","Karnak Temple","Abu Simbel"],mns:["Gran Esfinge de Giza","Templo de Karnak","Abu Simbel"],
+   fs:["Koshari","Ful medames","Om Ali"],fns:["Koshari","Ful Medames","Om Ali"]},
+  {n:"Sudáfrica",cap:"Pretoria",flag:"🇿🇦",
+   ms:["Table Mountain","Cape of Good Hope","Robben Island"],mns:["Montaña de la Mesa","Cabo de Buena Esperanza","Isla Robben"],
+   fs:["Bobotie","Biltong","Bunny chow"],fns:["Bobotie","Biltong","Bunny Chow"]},
+  {n:"Marruecos",cap:"Rabat",flag:"🇲🇦",
+   ms:["Hassan II Mosque","Ait Benhaddou","Koutoubia Mosque"],mns:["Mezquita Hassan II","Ait Benhaddou","Mezquita Koutoubia"],
+   fs:["Tajine","Couscous","Bastilla"],fns:["Tagine","Cuscús","Bastilla"]},
+  {n:"Turquía",cap:"Ankara",flag:"🇹🇷",
+   ms:["Hagia Sophia","Cappadocia","Ephesus"],mns:["Santa Sofía","Capadocia","Éfeso"],
+   fs:["Doner kebab","Baklava","Manti"],fns:["Döner Kebab","Baklava","Manti"]},
+  {n:"Grecia",cap:"Atenas",flag:"🇬🇷",
+   ms:["Parthenon","Santorini","Meteora"],mns:["Partenón","Santorini","Meteora"],
+   fs:["Greek salad","Moussaka","Spanakopita"],fns:["Ensalada Griega","Moussaka","Spanakopita"]},
+  {n:"Portugal",cap:"Lisboa",flag:"🇵🇹",
+   ms:["Tower of Belem","Jerónimos Monastery","Pena Palace"],mns:["Torre de Belém","Monasterio de los Jerónimos","Palacio de la Pena"],
+   fs:["Pastel de nata","Bacalhau","Caldo verde"],fns:["Pastel de Nata","Bacalhau","Caldo Verde"]},
+  {n:"Países Bajos",cap:"Ámsterdam",flag:"🇳🇱",
+   ms:["Rijksmuseum","Kinderdijk","Anne Frank House"],mns:["Rijksmuseum","Kinderdijk","Casa de Ana Frank"],
+   fs:["Stroopwafel","Herring","Dutch apple pie"],fns:["Stroopwafel","Arenque","Appeltaart"]},
+  {n:"Suecia",cap:"Estocolmo",flag:"🇸🇪",
+   ms:["Stockholm City Hall","Vasa Museum","Gamla Stan Stockholm"],mns:["Ayuntamiento de Estocolmo","Museo Vasa","Gamla Stan"],
+   fs:["Swedish meatballs","Gravlax","Cinnamon roll"],fns:["Albóndigas Suecas","Gravlax","Kanelbulle"]},
+  {n:"Colombia",cap:"Bogotá",flag:"🇨🇴",
+   ms:["Castillo San Felipe de Barajas","Ciudad Perdida","Cocora Valley"],mns:["Castillo San Felipe","Ciudad Perdida","Valle del Cocora"],
+   fs:["Bandeja paisa","Arepas","Sancocho"],fns:["Bandeja Paisa","Arepas","Sancocho"]},
+  {n:"Nigeria",cap:"Abuya",flag:"🇳🇬",
+   ms:["Zuma Rock","Yankari National Park","Aso Rock"],mns:["Zuma Rock","Parque Yankari","Aso Rock"],
+   fs:["Jollof rice","Suya","Egusi soup"],fns:["Jollof Rice","Suya","Sopa Egusi"]},
+  {n:"Kenya",cap:"Nairobi",flag:"🇰🇪",
+   ms:["Mount Kenya","Maasai Mara","Lake Nakuru"],mns:["Monte Kenia","Maasai Mara","Lago Nakuru"],
+   fs:["Nyama choma","Ugali","Sukuma wiki"],fns:["Nyama Choma","Ugali","Sukuma Wiki"]},
+  {n:"Arabia Saudí",cap:"Riad",flag:"🇸🇦",
+   ms:["Masmak Fortress","Al-Masjid al-Haram","Hegra"],mns:["Fortaleza Masmak","Mezquita de La Meca","Hegra"],
+   fs:["Kabsa","Shawarma","Mandi rice"],fns:["Kabsa","Shawarma","Mandi"]},
+  {n:"Indonesia",cap:"Yakarta",flag:"🇮🇩",
+   ms:["Borobudur","Prambanan","Komodo dragon"],mns:["Templo de Borobudur","Prambanan","Dragón de Komodo"],
+   fs:["Nasi goreng","Satay","Rendang"],fns:["Nasi Goreng","Satay","Rendang"]},
+  {n:"Perú",cap:"Lima",flag:"🇵🇪",
+   ms:["Machu Picchu","Huacachina","Rainbow Mountain Peru"],mns:["Machu Picchu","Huacachina","Montaña de Colores"],
+   fs:["Ceviche","Lomo saltado","Causa"],fns:["Ceviche","Lomo Saltado","Causa"]},
+  {n:"Nueva Zelanda",cap:"Wellington",flag:"🇳🇿",
+   ms:["Milford Sound","Hobbiton","Rotorua"],mns:["Milford Sound","Hobbiton","Rotorua"],
+   fs:["Pavlova","Hangi","Meat pie"],fns:["Pavlova","Hangi","Meat Pie"]}
+];
+
+const CONTS={"Europa":["España","Francia","Italia","Alemania","Reino Unido","Portugal","Países Bajos","Suecia","Grecia"],"América":["Estados Unidos","Brasil","Argentina","México","Colombia","Perú","Canadá"],"Asia":["Japón","China","India","Rusia","Turquía","Arabia Saudí","Indonesia"],"África":["Egipto","Sudáfrica","Marruecos","Nigeria","Kenya"],"Oceanía":["Australia","Nueva Zelanda"]};
+const DEFS=[{k:"flag",l:"Bandera"},{k:"monument",l:"Monumento"},{k:"food",l:"Comida típica"},{k:"capital",l:"Capital"}];
+const WIKI=t=>`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(t)}&prop=pageimages&pithumbsize=600&format=json&origin=*`;
+const ISO={España:"ES",Francia:"FR",Italia:"IT",Alemania:"DE","Reino Unido":"GB","Estados Unidos":"US",Brasil:"BR",Argentina:"AR","México":"MX","Japón":"JP",China:"CN",India:"IN",Rusia:"RU",Australia:"AU","Canadá":"CA",Egipto:"EG","Sudáfrica":"ZA",Marruecos:"MA","Turquía":"TR",Grecia:"GR",Portugal:"PT","Países Bajos":"NL",Suecia:"SE",Colombia:"CO",Nigeria:"NG",Kenya:"KE","Arabia Saudí":"SA",Indonesia:"ID","Perú":"PE","Nueva Zelanda":"NZ"};
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+
+function faces(pct){
+  if(pct>=90)return{f:"🤩🤩🤩🤩🤩",m:"¡Increíble, Nil!"};
+  if(pct>=70)return{f:"😄😄😄😄",m:"¡Muy bien!"};
+  if(pct>=50)return{f:"🙂🙂🙂",m:"¡Bien!"};
+  if(pct>=30)return{f:"😐😐",m:"Puedes mejorar"};
+  return{f:"😢",m:"¡A practicar!"};
+}
+function starsFor(ci){return ci===0?3:ci===1?2:1;}
+function starsHTML(n){return "⭐".repeat(n)+"<span style=opacity:.3>"+("⭐".repeat(3-n))+"</span>";}
+
+let S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},stars:0,streak:0};
+const app=document.getElementById("app");
+
+function home(){
+  S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},stars:0,streak:0};
+  const co=Object.keys(CONTS).map(c=>`<option>${c}</option>`).join("");
+  const po=[...C].sort((a,b)=>a.n.localeCompare(b.n,"es")).map(c=>`<option value="${c.n}">${c.flag} ${c.n}</option>`).join("");
+  app.innerHTML=`<div class="hw">
+<div class="eyebrow">Juego de geografía</div>
+<div class="ht">¿Qué<br>país es?</div>
+<div class="hs">Para Nil — adivina el país con las pistas</div>
+<button class="btn bm" onclick="go(&apos;r&apos;,null)">— País aleatorio</button>
+<div class="div">o elige</div>
+<div class="sl">Por continente</div>
+<div class="sr"><select id="sc">${co}</select><button class="btn bx" onclick="go(&apos;c&apos;,document.getElementById(&quot;sc&quot;).value)">Jugar</button></div>
+<div class="sl">País concreto</div>
+<div class="sr"><select id="sp">${po}</select><button class="btn bx" onclick="go(&apos;p&apos;,document.getElementById(&quot;sp&quot;).value)">Jugar</button></div>
+</div>`;
+}
+
+function go(mode,val){
+  const pool=mode==="r"?sh(C):mode==="c"?sh(C.filter(c=>CONTS[val]?.includes(c.n))):C.filter(c=>c.n===val);
+  S={...S,pool,score:0,total:0,stars:0,streak:0};next();
+}
+
+async function next(){
+  if(!S.pool.length){end();return;}
+  S.cur=S.pool.shift();
+  S.order=sh(DEFS);S.ci=0;S.cache={};
+  await render();
+}
+
+async function render(){
+  const ci=S.ci,tot=S.order.length;
+  let html="";
+  for(let i=0;i<=ci;i++) html+=await clue(S.order[i]);
+  const dots=S.order.map((_,i)=>`<div class="dot ${i<ci?"was":i===ci?"on":""}"></div>`).join("");
+  app.innerHTML=`<div class="gw">
+<div class="topbar">
+<div class="si"><div class="sn">${S.score}</div><div class="sk">Aciertos</div></div>
+<div class="sdv"></div>
+<div class="si"><div class="sn">${S.streak>1?S.streak+"🔥":S.streak}</div><div class="sk">Racha</div></div>
+<div class="sdv"></div>
+<div class="si"><div class="sn">${S.pool.length}</div><div class="sk">Restantes</div></div>
+</div>
+<div class="dots">${dots}</div>
+${html}
+${ci<tot-1?`<button class="btn bh" onclick="more()">+ Siguiente pista</button>`:""}
+<div class="acts">
+<button class="btn bc" onclick="ok()">✓ ¡Lo ha adivinado!</button>
+<button class="btn bsk" onclick="skip()">Saltar · No sabe</button>
+<button class="btn bend" onclick="end()">✕ Terminar partida</button>
+</div>
+</div>`;
+}
+
+async function clue(def){
+  const c=S.cur,{k,l}=def;
+  let b="";
+  if(k==="flag") b=`<span class="fe">${c.flag}</span>`;
+  else if(k==="capital") b=`<div class="cpt">${c.cap}</div>`;
+  else{
+    const terms=k==="monument"?c.ms:c.fs;
+    const names=k==="monument"?c.mns:c.fns;
+    // Try each term until one returns an image
+    let u=null,name=names[0];
+    for(let i=0;i<terms.length;i++){
+      u=await getImg(terms[i]);
+      if(u){name=names[i];break;}
+    }
+    const imgTag=u?`<div class="ci-wrap"><img class="ci" src="${u}" onerror="this.parentNode.outerHTML=\"<p class=ei>Imagen no disponible</p>\""></div>`:`<p class="ei">Imagen no disponible</p>`;
+    b=imgTag+`<div class="iname">${name}</div>`;
+  }
+  return`<div class="cc"><div class="ch"><span class="ct">${l}</span></div><div class="cb">${b}</div></div>`;
+}
+
+async function getImg(term){
+  if(term in S.cache) return S.cache[term];
+  try{
+    const r=await fetch(WIKI(term));
+    const d=await r.json();
+    const p=d.query.pages;
+    const u=p[Object.keys(p)[0]]?.thumbnail?.source||null;
+    S.cache[term]=u;
+    return u;
+  }catch{S.cache[term]=null;return null;}
+}
+
+async function more(){if(S.ci<S.order.length-1){S.ci++;await render();}}
+function ok(){S.score++;S.total++;S.streak++;S.stars+=starsFor(S.ci);result(true);}
+function skip(){S.total++;S.streak=0;result(false);}
+
+function result(win){
+  const c=S.cur;
+  const iso=ISO[c.n]||"";
+  const earned=win?starsFor(S.ci):0;
+  app.innerHTML=`<div class="rw">
+<div class="ri">${win?"🎉":"🌍"}</div>
+<div class="rf">${c.flag}</div>
+<div class="rn">${c.n}</div>
+<div class="rc">Capital · ${c.cap}</div>
+${win?`<div class="stars-earned">${starsHTML(earned)}</div>`:""}
+<div><span class="rtag ${win?"tok":"tno"}">${win?"¡Acertado!":"Era "+c.n}</span></div>
+<div class="map-wrap"><div id="mapbox">Cargando mapa...</div></div>
+<div class="ra">
+<button class="btn bm" onclick="next()">Siguiente país →</button>
+<button class="btn bsk" style="margin-top:4px" onclick="end()">Terminar partida</button>
+<button class="btn bsk" onclick="home()">Inicio</button>
+</div></div>`;
+  loadMap(iso);
+}
+
+function loadMap(iso){
+  const box=document.getElementById("mapbox");
+  if(!box||!iso)return;
+  fetch("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+    .catch(()=>null);
+  // Use simplemaps SVG via img tag - simpler and reliable
+  const url=`https://raw.githubusercontent.com/djaiss/mapsicon/master/all/${iso.toLowerCase()}/vector.svg`;
+  box.innerHTML=`<img src="${url}" style="width:100%;max-height:180px;object-fit:contain;filter:invert(1) sepia(1) saturate(3) hue-rotate(5deg);border-radius:4px" onerror="this.parentNode.innerHTML=''" alt="${iso}">`;
+}
+
+function end(){
+  if(S.total===0){home();return;}
+  const pct=Math.round(S.score/S.total*100);
+  const{f,m}=faces(pct);
+  const maxStars=S.total*3;
+  app.innerHTML=`<div class="ew">
+<div class="eyebrow">Fin de la partida</div>
+<div class="efaces">${f}</div>
+<div class="es">${S.score}/${S.total}</div>
+<div class="epct">${pct}% de aciertos</div>
+<div class="estars">⭐ ${S.stars} de ${maxStars} estrellas</div>
+<div class="emsg">${m}</div>
+<button class="btn bm" onclick="home()">Jugar de nuevo</button>
+</div>`;
+}
+
+home();
+</script>
+</body>
+</html>
