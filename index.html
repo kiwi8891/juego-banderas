@@ -45,8 +45,8 @@ select{flex:1;padding:13px 36px 13px 14px;border-radius:3px;border:1px solid var
 .ct{font-size:.62em;font-weight:800;letter-spacing:.2em;color:var(--mu2)}
 .cb{padding:22px}
 .fe{font-size:10em;line-height:1;text-align:center;display:block}
-.ci-wrap{width:100%;aspect-ratio:1/1;background:#000;border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.ci{width:100%;height:100%;object-fit:contain;display:block}
+.ci-wrap{width:100%;background:#000;border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ci{width:100%;height:auto;object-fit:contain;display:block}
 .cpt{font-family:"Syne",sans-serif;font-size:2.2em;font-weight:800;text-align:center}
 .iname{text-align:center;margin-top:12px;font-size:.82em;color:var(--mu2);font-weight:700;letter-spacing:.06em}
 .ei{color:var(--mu);font-size:.85em;text-align:center;padding:6px;font-weight:600}
@@ -74,6 +74,9 @@ select{flex:1;padding:13px 36px 13px 14px;border-radius:3px;border:1px solid var
 .es{font-family:"Syne",sans-serif;font-size:4.5em;font-weight:800;color:var(--gold);line-height:1}
 .epct{font-size:1.1em;color:var(--mu2);margin-top:6px;font-weight:700}
 .emsg{font-family:"Syne",sans-serif;font-size:1.3em;font-weight:800;margin:20px 0 36px;line-height:1.3}
+.stars-earned{font-size:1.8em;margin:8px 0 16px;letter-spacing:4px}
+.map-wrap{margin:16px 0;background:var(--s1);border:1px solid var(--bd);border-radius:4px;padding:16px;min-height:60px;display:flex;align-items:center;justify-content:center}
+.estars{font-size:1em;color:var(--gold);margin:8px 0 4px;font-weight:700}
 </style>
 </head>
 <body>
@@ -175,8 +178,8 @@ const C=[
 const CONTS={"Europa":["España","Francia","Italia","Alemania","Reino Unido","Portugal","Países Bajos","Suecia","Grecia"],"América":["Estados Unidos","Brasil","Argentina","México","Colombia","Perú","Canadá"],"Asia":["Japón","China","India","Rusia","Turquía","Arabia Saudí","Indonesia"],"África":["Egipto","Sudáfrica","Marruecos","Nigeria","Kenya"],"Oceanía":["Australia","Nueva Zelanda"]};
 const DEFS=[{k:"flag",l:"Bandera"},{k:"monument",l:"Monumento"},{k:"food",l:"Comida típica"},{k:"capital",l:"Capital"}];
 const WIKI=t=>`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(t)}&prop=pageimages&pithumbsize=600&format=json&origin=*`;
+const ISO={España:"ES",Francia:"FR",Italia:"IT",Alemania:"DE","Reino Unido":"GB","Estados Unidos":"US",Brasil:"BR",Argentina:"AR","México":"MX","Japón":"JP",China:"CN",India:"IN",Rusia:"RU",Australia:"AU","Canadá":"CA",Egipto:"EG","Sudáfrica":"ZA",Marruecos:"MA","Turquía":"TR",Grecia:"GR",Portugal:"PT","Países Bajos":"NL",Suecia:"SE",Colombia:"CO",Nigeria:"NG",Kenya:"KE","Arabia Saudí":"SA",Indonesia:"ID","Perú":"PE","Nueva Zelanda":"NZ"};
 const sh=a=>[...a].sort(()=>Math.random()-.5);
-const pick=a=>a[Math.floor(Math.random()*a.length)];
 
 function faces(pct){
   if(pct>=90)return{f:"🤩🤩🤩🤩🤩",m:"¡Increíble, Nil!"};
@@ -185,12 +188,14 @@ function faces(pct){
   if(pct>=30)return{f:"😐😐",m:"Puedes mejorar"};
   return{f:"😢",m:"¡A practicar!"};
 }
+function starsFor(ci){return ci===0?3:ci===1?2:1;}
+function starsHTML(n){return "⭐".repeat(n)+"<span style=opacity:.3>"+("⭐".repeat(3-n))+"</span>";}
 
-let S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{}};
+let S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},stars:0,streak:0};
 const app=document.getElementById("app");
 
 function home(){
-  S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{}};
+  S={pool:[],cur:null,order:[],ci:0,score:0,total:0,cache:{},stars:0,streak:0};
   const co=Object.keys(CONTS).map(c=>`<option>${c}</option>`).join("");
   const po=[...C].sort((a,b)=>a.n.localeCompare(b.n,"es")).map(c=>`<option value="${c.n}">${c.flag} ${c.n}</option>`).join("");
   app.innerHTML=`<div class="hw">
@@ -208,7 +213,7 @@ function home(){
 
 function go(mode,val){
   const pool=mode==="r"?sh(C):mode==="c"?sh(C.filter(c=>CONTS[val]?.includes(c.n))):C.filter(c=>c.n===val);
-  S={...S,pool,score:0,total:0};next();
+  S={...S,pool,score:0,total:0,stars:0,streak:0};next();
 }
 
 async function next(){
@@ -227,7 +232,7 @@ async function render(){
 <div class="topbar">
 <div class="si"><div class="sn">${S.score}</div><div class="sk">Aciertos</div></div>
 <div class="sdv"></div>
-<div class="si"><div class="sn">${S.total}</div><div class="sk">Jugados</div></div>
+<div class="si"><div class="sn">${S.streak>1?S.streak+"🔥":S.streak}</div><div class="sk">Racha</div></div>
 <div class="sdv"></div>
 <div class="si"><div class="sn">${S.pool.length}</div><div class="sk">Restantes</div></div>
 </div>
@@ -275,33 +280,50 @@ async function getImg(term){
 }
 
 async function more(){if(S.ci<S.order.length-1){S.ci++;await render();}}
-function ok(){S.score++;S.total++;result(true);}
-function skip(){S.total++;result(false);}
+function ok(){S.score++;S.total++;S.streak++;S.stars+=starsFor(S.ci);result(true);}
+function skip(){S.total++;S.streak=0;result(false);}
 
 function result(win){
   const c=S.cur;
+  const iso=ISO[c.n]||"";
+  const earned=win?starsFor(S.ci):0;
   app.innerHTML=`<div class="rw">
 <div class="ri">${win?"🎉":"🌍"}</div>
 <div class="rf">${c.flag}</div>
 <div class="rn">${c.n}</div>
 <div class="rc">Capital · ${c.cap}</div>
+${win?`<div class="stars-earned">${starsHTML(earned)}</div>`:""}
 <div><span class="rtag ${win?"tok":"tno"}">${win?"¡Acertado!":"Era "+c.n}</span></div>
+<div class="map-wrap"><div id="mapbox">Cargando mapa...</div></div>
 <div class="ra">
 <button class="btn bm" onclick="next()">Siguiente país →</button>
 <button class="btn bsk" style="margin-top:4px" onclick="end()">Terminar partida</button>
 <button class="btn bsk" onclick="home()">Inicio</button>
 </div></div>`;
+  loadMap(iso);
+}
+
+function loadMap(iso){
+  const box=document.getElementById("mapbox");
+  if(!box||!iso)return;
+  fetch("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+    .catch(()=>null);
+  // Use simplemaps SVG via img tag - simpler and reliable
+  const url=`https://raw.githubusercontent.com/djaiss/mapsicon/master/all/${iso.toLowerCase()}/vector.svg`;
+  box.innerHTML=`<img src="${url}" style="width:100%;max-height:180px;object-fit:contain;filter:invert(1) sepia(1) saturate(3) hue-rotate(5deg);border-radius:4px" onerror="this.parentNode.innerHTML=''" alt="${iso}">`;
 }
 
 function end(){
   if(S.total===0){home();return;}
   const pct=Math.round(S.score/S.total*100);
   const{f,m}=faces(pct);
+  const maxStars=S.total*3;
   app.innerHTML=`<div class="ew">
 <div class="eyebrow">Fin de la partida</div>
 <div class="efaces">${f}</div>
 <div class="es">${S.score}/${S.total}</div>
 <div class="epct">${pct}% de aciertos</div>
+<div class="estars">⭐ ${S.stars} de ${maxStars} estrellas</div>
 <div class="emsg">${m}</div>
 <button class="btn bm" onclick="home()">Jugar de nuevo</button>
 </div>`;
